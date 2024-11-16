@@ -5,6 +5,11 @@
 package activtity.registrations;
 
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+
 import java.util.ArrayList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -16,14 +21,14 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+
 /**
  *
  * @author RC_Student_lab
  */
 public class TaskTest {
-   
-  
-    private Task task;
+    
+   private Task task;
 
     public TaskTest() {
        
@@ -58,7 +63,7 @@ public class TaskTest {
 ********************************************************************************
 ********************************************************************************
 */
-   
+    
     
      /**
      * Test of checkTaskDescription method, of class Task.
@@ -190,9 +195,308 @@ public void testTotalHoursAccumulation() {
         }
     }
     
+    
 /**********************End of Part 2 POE****************************************
 ********************************************************************************
 ********************************************************************************
 */ 
+          
+/*
+***************************Getter Testing **************************************
+********************************************************************************
+********************************************************************************
+*/
+  
+  @Test
+  public void testGetDeveloperDetails() {
+    System.out.println("getDeveloperDetails");
+    
+    
+    Task instance = new Task("Add Task Feature", 
+                             "Create Add Task feature to add task users", 
+                             "Mike Smith", 10, "Doing");
+    
+    String expResult = "Mike Smith";  
+    
+    String result = instance.getDeveloperDetails();
+    assertEquals(expResult, result);
 }
 
+    
+   
+    
+    @Test
+    public void testGetTaskName() {
+        System.out.println("getTaskName");
+       
+        
+        Task instance = new Task("Add Task Feature", 
+                             "Create Add Task feature to add task users", 
+                             "Mike Smith", 10, "Doing");
+    
+    String expResult = "Add Task Feature";  
+    
+    String result = instance.getTaskName();
+    assertEquals(expResult, result);
+       
+    }
+
+  
+    @Test
+    public void testGetTaskDuration() {
+        System.out.println("getTaskDuration");
+        
+        Task instance = new Task("Add Task Feature", 
+                             "Create Add Task feature to add task users", 
+                             "Mike Smith", 10, "Doing");
+    
+   int expResult = 10;  
+    
+   int result =  instance.getTaskDuration();
+   assertEquals(expResult, result);
+       
+    }
+
+   
+    @Test
+    public void testGetTaskStatus() {
+        System.out.println("getTaskStatus");
+     
+        
+             Task instance = new Task("Add Task Feature", 
+                             "Create Add Task feature to add task users", 
+                             "Mike Smith", 10, "Doing");
+    
+ String expResult = "Doing";  
+    
+   String result =  instance.getTaskStatus();
+   assertEquals(expResult, result);
+       
+    }
+
+ 
+    @Test
+  public void testGetreturnTotalHours()  {
+    
+    Task[] tasks = {
+        new Task("Login Feature", "Create Login to authenticate user", "Robyn Harrison", 8, "To Do"),
+        new Task("Add Task Feature", "Create add task feature to add task users", "Mike Smith", 10, "Doing")
+    };
+
+    int total = 0;
+    
+    for (Task instance : tasks) {
+        total += instance.getreturnTotalHours(); 
+    }
+
+    int expectedTotal = 18;
+
+    assertEquals(expectedTotal, total);
+}
+    
+/**********************End of Getter *******************************************
+********************************************************************************
+********************************************************************************
+*/ 
+
+/*
+***************************Final Part 3 POE Testing*****************************
+********************************************************************************
+********************************************************************************
+*/
+  
+  
+    /**
+     * Test of getDevelopers method, of class EasyKanbansss.
+     */
+    @Test
+    public void testGetDevelopers() {
+    System.out.println("getDevelopers");
+    System.out.println("Mike Smith ,Edward Harrison ,Samantha Paulson ,Glenda Oberholzer");
+
+    String[] expResult = {};
+
+    String[] result =  Task.getDevelopers();
+
+    assertArrayEquals(expResult, result);
+
+    
+}
+
+    
+    /**
+     * Test of displayCompletedTasks method, of class EasyKanbansss.
+     */
+  @Test
+public void testDisplayCompletedTasks() {
+    System.out.println("DisplayCompletedTasks:");
+    System.out.println("Samantha Paulson, Create Reports,2");
+    
+    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    PrintStream originalOut = System.out;
+    System.setOut(new PrintStream(outContent));
+
+    try {
+       
+         Task.displayCompletedTasks();
+
+        String expResult = "";  
+        
+        assertEquals(expResult, outContent.toString());
+        
+    } finally {
+       
+        System.setOut(originalOut);
+    }
+}
+   
+    
+    
+    /**
+     * Test of displayLongestTask method, of class EasyKanbansss.
+     */
+@Test
+public void testDisplayLongestTask() {
+    System.out.println("DisplayLongestTask:");
+  System.out.println("Glenda Oberholzer,11");
+  
+    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    PrintStream originalOut = System.out;
+    System.setOut(new PrintStream(outContent));
+
+    try {
+        
+        Task.displayLongestTask();
+
+        
+        String expResult = "";  
+        
+      
+        assertEquals(expResult, outContent.toString());
+        
+    } finally {
+        
+        System.setOut(originalOut);
+    }
+}
+
+
+
+    /**
+     * Test of searchTaskByName method, of class EasyKanbansss.
+     */
+@Test
+public void testSearchTaskByName() {
+    System.out.println("SearchTaskByName:");
+    System.out.println("Mike Smith, Create Login");
+    
+    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    PrintStream originalOut = System.out;
+    System.setOut(new PrintStream(outContent));
+
+    try {
+        
+        String taskName = "Create Login";  
+
+        Task.searchTaskByName(taskName);
+
+        String expResult = ""; 
+        
+        assertEquals(expResult, outContent.toString());
+        
+    } finally {
+     
+        System.setOut(originalOut);
+    }
+}
+
+
+    /**
+     * Test of searchTasksByDeveloper method, of class EasyKanbansss.
+     */
+@Test
+public void testSearchTasksByDeveloper() {
+    System.out.println("SearchTasksByDeveloper:");
+    System.out.println("Create Reports,Samantha Paulson");
+    
+    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    PrintStream originalOut = System.out;
+    System.setOut(new PrintStream(outContent));
+
+    try {
+       
+        String developer = "Samantha Paulson";  
+
+       Task.searchTasksByDeveloper(developer);
+        
+        String expResult = "";  
+        
+        assertEquals(expResult, outContent.toString());
+        
+    } finally {
+      
+        System.setOut(originalOut);
+    }
+}
+ 
+
+    /**
+     * Test of deleteTask method, of class EasyKanbansss.
+     */
+@Test
+public void  testDeleteTask() {
+    System.out.println("DeleteTask");
+   
+    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    PrintStream originalOut = System.out;
+    System.setOut(new PrintStream(outContent));
+
+    try {
+       
+        String taskName = "Create Reports";  
+
+         Task.deleteTask(taskName);
+        
+        String expResult = "";  
+        
+        assertEquals(expResult, outContent.toString());
+        
+    } finally {
+      
+        System.setOut(originalOut);
+    }
+}
+
+
+    /**
+     * Test of displayReport method, of class EasyKanbansss.
+     */
+@Test
+public void testDisplayReport() {
+    System.out.println("DisplayReport");
+
+   
+    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    PrintStream originalOut = System.out;
+    System.setOut(new PrintStream(outContent));
+
+    try {
+       
+        Task.displayReport();
+
+        String expResult = "";  
+
+        assertEquals(expResult, outContent.toString());
+        
+    } finally {
+      
+        System.setOut(originalOut);
+    }
+}
+
+/**********************End of Final POE Testing*********************************
+********************************************************************************
+********************************************************************************
+*/ 
+    
+}

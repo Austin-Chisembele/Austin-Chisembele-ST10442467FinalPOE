@@ -3,15 +3,23 @@
  */
 
 package activtity.registrations;
+/*
+******************Unit test made in file(Registrations.javaTest)****************
 
+******************Unit test made in file(LoginTest.java-part 1)*****************
+
+******************Unit test made in file(TaskTest.java-part 2 & part 3)*********
+
+******************External file(Login-part 1)***********************************
+
+******************External file(Task-part 2 & part 3)***************************
+*/
 /**
  *
  * @author RC_Student_lab
  */
 
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 /*
@@ -22,10 +30,12 @@ import javax.swing.JOptionPane;
 
 //Create Main Class for Registrations(Farrell, 2022).
 public class Registrations{
+      
+    
 public static void main(String[] args) {
     
     
-JOptionPane.showMessageDialog(null, "POE PART 2 EasyKanban App(ST10442467 Austin)");
+ JOptionPane.showMessageDialog(null, "Final POE EasyKanban App(ST10442467 Austin)");
    
 /***************************** Part 1 POE **************************************
 ********************************************************************************
@@ -77,15 +87,13 @@ System.out.println("=================Exit Account=============================")
 */
 
 
-/**********************************Part 2 POE **********************************
+/******************************Menu Option *************************************
 ********************************************************************************
 ********************************************************************************
 */
-
- 
        user = JOptionPane.showInputDialog("Enter your Username:");//kyl_1
        password = JOptionPane.showInputDialog("Enter your Password:");//Ch&&sec@ke99!
-       name= JOptionPane.showInputDialog("Enter your Name:");//Austin
+       name= JOptionPane.showInputDialog("Enter your Name:");//Austin_
        surName = JOptionPane.showInputDialog("Enter your Surname:");//Chisembele
          
      
@@ -93,7 +101,7 @@ System.out.println("=================Exit Account=============================")
         if (user1.checkUserName(user) && user1.checkPasswordComplexity(password)) {
             
          //login successful display a messageDialog for the app. 
-         String display="Username has been successfully recorded. \n Password was successfully obtained.\n ";
+         String display=" Username has been successfully recorded. \n Password was successfully obtained.\n ";
                
          JOptionPane.showMessageDialog(null,display + user1.registerUser(user,  password,  name,  surName)   );
            
@@ -102,13 +110,23 @@ System.out.println("=================Exit Account=============================")
             int option;
             do {
                 // Display menu option
-                String menu = "Choose an option:\n1) Add Tasks\n2) Show Report\n3) Quit";
+                String menu = "Choose an option:\n1) Add Tasks(POE Part 2)\n2) Show Report(POE Part 3)\n3) Quit";
                 String choice = JOptionPane.showInputDialog(menu);
                 option = Integer.parseInt(choice);
 
-                switch (option) {
-                    case 1 -> attachTasks();
-                    case 2 -> JOptionPane.showMessageDialog(null, "Coming Soon");
+               switch (option) {
+                    //*************************Part 2 POE***********************
+                    case 1 -> Task.attachTasks();
+                    //*************************Part 3 POE***********************
+                    case 2 ->{Task.populateTasks();  
+                    Task.getDevelopers() ;
+                    Task.displayCompletedTasks();
+                    Task.displayLongestTask();
+                    Task.searchTaskByName("Create Login");
+                    Task.searchTasksByDeveloper("Samantha Paulson");
+                    Task.deleteTask("Create Reports");
+                    Task.displayReport();
+                    }
                     case 3 -> JOptionPane.showMessageDialog(null, "Exiting the application. Goodbye!");
                     default -> JOptionPane.showMessageDialog(null, "Invalid option. Please try again.");
                 }
@@ -120,41 +138,13 @@ System.out.println("=================Exit Account=============================")
               JOptionPane.showMessageDialog(null,  error );
         }
         
-}
-
-     private static void attachTasks() {
-         
-        List<Task> tasks = new ArrayList<>();
-         
-            int numTasks = Integer.parseInt(JOptionPane.showInputDialog("How many tasks do you want to enter?"));
-            
-            for (int i = 0; i < numTasks; i++) {
-                String taskName = JOptionPane.showInputDialog("Enter Task Name:");
-                String taskDescription = JOptionPane.showInputDialog("Enter Task Description (max 50 chars):");
-                
-                if (!new Task(taskName, taskDescription, "", 0, "").checkTaskDescription()) {
-                    JOptionPane.showMessageDialog(null, "Please enter a task description of less than 50 characters");
-                    i--; // decrement i to retry
-                    continue;
-                }
-                
-                String developerDetails = JOptionPane.showInputDialog("Enter Developer Details (First Last):");
-                int taskDuration = Integer.parseInt(JOptionPane.showInputDialog("Enter Task Duration (hrs):"));
-                String taskStatus = (String) JOptionPane.showInputDialog(null, "Select Task Status:",
-                        "Task Status", JOptionPane.QUESTION_MESSAGE, null, new String[]{"To Do", "Doing", "Done"}, "To Do");
-                
-                //Call the class called Task from external class
-                Task task = new Task(taskName, taskDescription, developerDetails, taskDuration, taskStatus);
-                tasks.add(task);
-                 JOptionPane.showMessageDialog(null, "Tasks added successfully!");
-                JOptionPane.showMessageDialog(null, task.printTaskDetails());
-            }
-            int totalHours = Task.returnTotalHours(tasks);
-            JOptionPane.showMessageDialog(null, "Total Hours: " + totalHours);
-            JOptionPane.showMessageDialog(null, "Thank you for using EasyKanban!");
-    }
-
-}
+/******************************End of Menu Option ******************************
+********************************************************************************
+********************************************************************************
+*/      
+        
+        
+}   
 /*
 References List
 
@@ -162,27 +152,25 @@ Farrell,J.2022.Java Programming.10th ed.United States of America: Cengage learni
  
 Geeksforgeeks.2023.java joptionpane,7 November 2023.[Online].
 Available at:https://www.geeksforgeeks.org/java-joptionpane/
-[Accessed 4 October 2024].
+[Accessed 31 October 2024].
 
 
 Java JOptionpane.2024.java joptionpane,11 October 2024.[Online].
 Available at:https://www.javatpoint.com/java-joptionpane
-[Accessed 11 October 2024].
+[Accessed 6 November 2024].
 
 
 Stackoverflow.2022.printing multiple user input from a loop,30 May 2022.[Online].
 Available at:https://stackoverflow.com/questions/72426601/printing-multiple-user-input-from-a-loop
-[Accessed 10 October 2024].
+[Accessed 16 November 2024].
 
 
 W3schools.2024.Java Tutorial,10 August 2024.[Online].
 Available at:https://www.w3schools.com/
-[Accessed 18 October 2024].
+[Accessed 19 November 2024].
  
 */
+   
 
+}
 
-/**********************End of Part 2 POE****************************************
-********************************************************************************
-********************************************************************************
-*/
